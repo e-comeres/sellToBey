@@ -3,6 +3,7 @@ import Navbar from "../navbar/Navbar";
 import axios from "axios";
 import "./Sign.css";
 import { useNavigate } from "react-router-dom";
+import Footer from "../footer/Footer";
 const Signin = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -60,6 +61,10 @@ const Signin = () => {
         </button>
       </div>
       {message && <p>{message}</p>}
+
+      <div>
+        <Footer />
+      </div>
     </div>
   );
 };

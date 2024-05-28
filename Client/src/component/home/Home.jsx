@@ -1,108 +1,96 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "../navbar/Navbar";
 import "./Home.css";
-const Home = () => {
+import Category from "./Category";
+import axios from "axios";
+import Footer from "../footer/Footer";
+const Home = ({ data }) => {
+  const [best, setBest] = useState([]);
+  const [flash, setFlash] = useState([]);
+  useEffect(() => {
+    axios
+      .get(`http://localhost:4000/api/products/condition/best seller`)
+      .then((response) => {
+        setBest(response.data);
+      })
+      .catch((err) => {
+        console.error(err);
+      }),
+      axios
+        .get(`http://localhost:4000/api/products/condition/flash sells`)
+        .then((response) => {
+          setFlash(response.data);
+          console.log(response.data);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+  }, []);
   return (
     <div>
       <Navbar />
-      <div id="home">
-        <>
-          <div className="homeCarroussel">
-            <section className="carousel" aria-label="Gallery">
-              <ol className="carousel__viewport">
-                <li
-                  id="carousel__slide1"
-                  tabIndex={0}
-                  className="carousel__slide"
-                >
-                  <div className="carousel__snapper">
-                    <a href="#carousel__slide4" className="carousel__prev">
-                      Go to last slide
-                    </a>
-                    <a href="#carousel__slide2" className="carousel__next">
-                      Go to next slide
-                    </a>
-                  </div>
-                </li>
-                <li
-                  id="carousel__slide2"
-                  tabIndex={0}
-                  className="carousel__slide"
-                >
-                  <div className="carousel__snapper" />
-                  <a href="#carousel__slide1" className="carousel__prev">
-                    Go to previous slide
-                  </a>
-                  <a href="#carousel__slide3" className="carousel__next">
-                    Go to next slide
-                  </a>
-                </li>
-                <li
-                  id="carousel__slide3"
-                  tabIndex={0}
-                  className="carousel__slide"
-                >
-                  <div className="carousel__snapper" />
-                  <a href="#carousel__slide2" className="carousel__prev">
-                    Go to previous slide
-                  </a>
-                  <a href="#carousel__slide4" className="carousel__next">
-                    Go to next slide
-                  </a>
-                </li>
-                <li
-                  id="carousel__slide4"
-                  tabIndex={0}
-                  className="carousel__slide"
-                >
-                  <div className="carousel__snapper" />
-                  <a href="#carousel__slide3" className="carousel__prev">
-                    Go to previous slide
-                  </a>
-                  <a href="#carousel__slide1" className="carousel__next">
-                    Go to first slide
-                  </a>
-                </li>
-              </ol>
-              <aside className="carousel__navigation">
-                <ol className="carousel__navigation-list">
-                  <li className="carousel__navigation-item">
-                    <a
-                      href="#carousel__slide1"
-                      className="carousel__navigation-button"
-                    >
-                      Go to slide 1
-                    </a>
-                  </li>
-                  <li className="carousel__navigation-item">
-                    <a
-                      href="#carousel__slide2"
-                      className="carousel__navigation-button"
-                    >
-                      Go to slide 2
-                    </a>
-                  </li>
-                  <li className="carousel__navigation-item">
-                    <a
-                      href="#carousel__slide3"
-                      className="carousel__navigation-button"
-                    >
-                      Go to slide 3
-                    </a>
-                  </li>
-                  <li className="carousel__navigation-item">
-                    <a
-                      href="#carousel__slide4"
-                      className="carousel__navigation-button"
-                    >
-                      Go to slide 4
-                    </a>
-                  </li>
-                </ol>
-              </aside>
-            </section>
-          </div>
-        </>
+      <div>
+        <input type="radio" name="position" defaultChecked="" />
+        <input type="radio" name="position" />
+        <input type="radio" name="position" />
+        <input type="radio" name="position" />
+        <input type="radio" name="position" />
+        <main id="carousel">
+          <div className="item" />
+          <main></main>
+        </main>
+      </div>
+
+      <h2>flash Sells</h2>
+      <div className="grid-container">
+        {flash.map((el) => {
+          return (
+            <div className="grid-item">
+              <h5>{el.name}</h5>
+              <img src={el.imgUrl} alt="" />
+              <p>{el.category} </p>
+              <p>{el.price}</p>
+            </div>
+          );
+        })}
+      </div>
+      <div>
+        <h2>categories</h2>
+        <Category />
+      </div>
+      <div>
+        <h2>Best Seller</h2>
+        <div className="grid-container">
+          {best.map((el) => {
+            return (
+              <div className="grid-item">
+                <h5>{el.name}</h5>
+                <img src={el.imgUrl} alt="" />
+                <p>{el.category} </p>
+                <p>{el.price}</p>
+              </div>
+            );
+          })}
+        </div>
+        <h2>explore our products</h2>
+        <div className="grid-container">
+          {data.map((el) => {
+            return (
+              <div className="grid-item">
+                <h5>{el.name}</h5>
+                <img src={el.imgUrl} alt="" />
+                <p>{el.category} </p>
+                <p>{el.price}</p>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      <br />
+      <br />
+      <br />
+      <div>
+        <Footer />
       </div>
     </div>
   );
