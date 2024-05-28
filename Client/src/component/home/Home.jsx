@@ -36,8 +36,13 @@ const Home = ({ data }) => {
         <input type="radio" name="position" />
         <input type="radio" name="position" />
         <main id="carousel">
-          <div className="item" />
-          <main></main>
+          {data.map((el) => {
+            return (
+              <div className="item">
+                <img id="carImg" src={el.imgUrl} alt="" />
+              </div>
+            );
+          })}
         </main>
       </div>
 
