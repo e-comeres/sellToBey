@@ -1,14 +1,15 @@
 // controllers/authController.js
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const User = require("../models/UserModels.js");
+// const User = require("../models/UserModels.js");
+const db = require("../database/index.js");
 const { JWT_SECRET } = require("../../config");
 
 async function login(req, res) {
   const { username, password } = req.body;
 
   try {
-    const user = await User.findOne({ where: { username } });
+    const user = await db.User.findOne({ where: { username } });
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
@@ -36,7 +37,7 @@ async function register(req, res) {
 
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
-    const user = await User.create({ username, password: hashedPassword });
+    const user = await db.User.create({ username, password: hashedPassword });
 
     return res.status(201).json({ message: "User created successfully" });
   } catch (error) {
