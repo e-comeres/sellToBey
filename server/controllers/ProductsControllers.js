@@ -6,7 +6,7 @@ module.exports = {
       .then((data) => {
         res.send(data);
       })
-      .cattch((err) => {
+      .catch((err) => {
         res.send(err);
       });
   },
@@ -62,6 +62,19 @@ module.exports = {
     db.Product.findAll({
       where: {
         category: req.params.category,
+      },
+    })
+      .then((data) => {
+        res.send(data);
+      })
+      .catch((err) => {
+        res.send(err);
+      });
+  },
+  getByCondition: (req, res) => {
+    db.Product.findAll({
+      where: {
+        condition: req.params.condition,
       },
     })
       .then((data) => {

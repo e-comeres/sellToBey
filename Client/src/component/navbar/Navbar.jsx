@@ -6,7 +6,13 @@ const Navbar = () => {
   return (
     <div id="nav">
       <div className="topnav">
-        <a className="active" href="#home">
+        <a
+          className="active"
+          href="#home"
+          onClick={() => {
+            navigate("/");
+          }}
+        >
           Home
         </a>
         <a href="#about">About</a>
