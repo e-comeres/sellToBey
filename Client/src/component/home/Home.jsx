@@ -4,14 +4,31 @@ import "./Home.css";
 import Category from "./Category";
 import axios from "axios";
 import Footer from "../footer/Footer";
+import { useAuth } from "../context/AuthContext";
 const Home = ({ data }) => {
   const [best, setBest] = useState([]);
   const [flash, setFlash] = useState([]);
+  const { user } = useAuth();
+  const addToPanier = (id) => {
+    const data = {
+      UserId: user.id,
+      productId: id,
+    };
+    axios
+      .post("http://localhost:4000/api/panier/addToPanier", data)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
   useEffect(() => {
     axios
       .get(`http://localhost:4000/api/products/condition/best seller`)
       .then((response) => {
         setBest(response.data);
+        console.log(best);
       })
       .catch((err) => {
         console.error(err);
@@ -55,6 +72,14 @@ const Home = ({ data }) => {
               <img src={el.imgUrl} alt="" />
               <p>{el.category} </p>
               <p>{el.price}</p>
+
+              <button
+                onClick={() => {
+                  addToPanier(el.id);
+                }}
+              >
+                add to list
+              </button>
             </div>
           );
         })}
@@ -73,6 +98,13 @@ const Home = ({ data }) => {
                 <img src={el.imgUrl} alt="" />
                 <p>{el.category} </p>
                 <p>{el.price}</p>
+                <button
+                  onClick={() => {
+                    addToPanier(el.id);
+                  }}
+                >
+                  add to list
+                </button>
               </div>
             );
           })}
@@ -86,6 +118,13 @@ const Home = ({ data }) => {
                 <img src={el.imgUrl} alt="" />
                 <p>{el.category} </p>
                 <p>{el.price}</p>
+                <button
+                  onClick={() => {
+                    addToPanier(el.id);
+                  }}
+                >
+                  add to list
+                </button>
               </div>
             );
           })}
