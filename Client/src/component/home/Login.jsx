@@ -7,15 +7,16 @@ import { useAuth } from "../context/AuthContext";
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [role, setRole] = useState("");
   const [message, setMessage] = useState("");
+  const [email, setEmail] = useState("");
+
   const navigate = useNavigate();
   const { loginAction } = useAuth();
   console.log("hola", loginAction);
   console.log("hola", useAuth);
   const handleLogin = async (e) => {
     e.preventDefault();
-    loginAction({ username: username, password: password, role: role });
+    loginAction({ username: username, email: email, password: password });
     navigate("/");
   };
 
@@ -58,6 +59,19 @@ const Login = () => {
             </div>
             <div className="floating-label">
               <input
+                placeholder="email"
+                type="text"
+                name="email"
+                id="email"
+                autoComplete="off"
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+              />
+              <label htmlFor="username">email:</label>
+            </div>
+            <div className="floating-label">
+              <input
                 placeholder="Password"
                 type="password"
                 name="password"
@@ -69,19 +83,7 @@ const Login = () => {
               />
               <label htmlFor="password">Password:</label>
             </div>
-            <div className="floating-label">
-              <input
-                placeholder="Role"
-                type="role"
-                name="role"
-                id="role"
-                autoComplete="off"
-                onChange={(e) => {
-                  setRole(e.target.value);
-                }}
-              />
-              <label htmlFor="password">Password:</label>
-            </div>
+
             <button onClick={handleLogin}>Log in</button>
           </form>
           {message && <p>{message}</p>}

@@ -5,6 +5,11 @@ import "./App.css";
 
 import Signin from "./component/home/Signin";
 import Home from "./component/home/Home";
+import Admin from "./component/admin/adminapp";
+import Getprodact from "./component/admin/prodacts/getprodact";
+import Getusers  from "./component/admin/users/getusers";
+import Getoneusers from "./component/admin/users/getoneusers";
+// import Getseller  from "./component/admin/seller/getseller";
 import SellerInterface from "./component/seller/SellerInterface";
 import NewProduct from "./component/seller/NewProduct";
 
@@ -42,10 +47,16 @@ function App() {
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/oneCath" element={<OneCategory />} />
             <Route exact path="/panier" element={<Panier />} />
+            <Route exact path="/admin" element={<Admin/>}/>
+          <Route exact path="/allprodact" element={<Getprodact/>} />
+          <Route exact path="/alluseres" element={<Getusers/>} />
+          <Route exact path="/oneuser" element={<Getoneusers/>} />
+          {/* <Route exact path="/allseller" element={<Getseller/>} /> */}
                   <Route exact path="/seller" element={<SellerInterface/>}/>
           <Route exact path="/sellerNewProduct" element={<NewProduct/>}/>
           </Routes>
         </AuthProvider>
+
       </Router>
       <Toaster />
     </>
