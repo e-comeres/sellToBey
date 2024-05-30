@@ -1,27 +1,22 @@
+import axios from "axios";
 import React, { useState } from "react";
 import Navbar from "../navbar/Navbar";
-import axios from "axios";
-import "./Sign.css";
 import { useNavigate } from "react-router-dom";
-
-const Signin = () => {
+import { useAuth } from "../context/AuthContext";
+// import { useAuth } from "../context/AuthContext";
+const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [role, setRole] = useState("");
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
-  const signup = async () => {
-    try {
-      const response = await axios.post(
-        "http://localhost:4000/api/auth/register",
-        { username: username, password: password }
-      );
-      setMessage("Signup successful!");
-      console.log(message);
-      navigate("/");
-    } catch (error) {
-      console.log(error);
-      setMessage("Signup failed. Please try again.");
-    }
+  const { loginAction } = useAuth();
+  console.log("hola", loginAction);
+  console.log("hola", useAuth);
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    loginAction({ username: username, password: password, role: role });
+    navigate("/");
   };
 
   return (
@@ -74,21 +69,26 @@ const Signin = () => {
               />
               <label htmlFor="password">Password:</label>
             </div>
-            <button onClick={signup}>Sign up</button>
-            <button
-              onClick={() => {
-                navigate("/login");
-              }}
-            >
-              log in{" "}
-            </button>
+            <div className="floating-label">
+              <input
+                placeholder="Role"
+                type="role"
+                name="role"
+                id="role"
+                autoComplete="off"
+                onChange={(e) => {
+                  setRole(e.target.value);
+                }}
+              />
+              <label htmlFor="password">Password:</label>
+            </div>
+            <button onClick={handleLogin}>Log in</button>
           </form>
           {message && <p>{message}</p>}
-          {console.log(message)}
         </div>
       </div>
     </div>
   );
 };
 
-export default Signin;
+export default Login;
