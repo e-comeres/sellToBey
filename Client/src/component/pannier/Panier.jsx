@@ -19,7 +19,7 @@ const Panier = () => {
   return (
     <div>
       {sel3a.map((el) => {
-        return <h3>{el.productId}</h3>;
+        return <h3>{el.name}</h3>;
       })}
     </div>
   );
