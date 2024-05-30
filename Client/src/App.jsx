@@ -7,12 +7,18 @@ import Signin from "./component/home/Signin";
 import Home from "./component/home/Home";
 import axios from "axios";
 import OneCategory from "./component/home/OneCategory";
+import Login from "./component/home/Login";
+import { AuthProvider } from "./component/context/AuthContext";
+import { Toaster } from "react-hot-toast";
+import Panier from "./component/pannier/Panier";
 
 function App() {
   const [data, setData] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:4000/api/products")
+      .get("http://localhost:4000/api/products", {
+        headers: localStorage.getItem("token"),
+      })
       .then((response) => {
         console.log(response.data);
         setData(response.data);
@@ -24,12 +30,17 @@ function App() {
   return (
     <>
       <Router>
-        <Routes>
-          <Route exact path="/" element={<Home data={data} />} />
-          <Route exact path="/sign" element={<Signin />} />
-          <Route exact path="/oneCath" element={<OneCategory />} />
-        </Routes>
+        <AuthProvider>
+          <Routes>
+            <Route exact path="/" element={<Home data={data} />} />
+            <Route exact path="/sign" element={<Signin />} />
+            <Route exact path="/login" element={<Login />} />
+            <Route exact path="/oneCath" element={<OneCategory />} />
+            <Route exact path="/panier" element={<Panier />} />
+          </Routes>
+        </AuthProvider>
       </Router>
+      <Toaster />
     </>
   );
 }

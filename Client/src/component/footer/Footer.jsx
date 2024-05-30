@@ -2,7 +2,7 @@ import React from "react";
 import "./Footer.css";
 const Footer = () => {
   return (
-    <div>
+    <div id="footer1">
       <footer className="footer">
         <div className="footer__parralax">
           <div className="footer__parralax-trees" />
@@ -85,7 +85,7 @@ const Footer = () => {
                       href="mailto:contact.laboiserie@gmail.com"
                       className="footer__nav-link"
                     >
-                      contact.laboiserie@gmail.com
+                      contact.salahadem817@gmail.com
                     </a>
                   </li>
                 </ul>
@@ -96,7 +96,7 @@ const Footer = () => {
             <p>
               Réalisé par{" "}
               <a href="https://twitter.com/silvereledev" target="_blank">
-                @SilvereLeDev
+                @AdamLeDev
               </a>
             </p>
           </div>

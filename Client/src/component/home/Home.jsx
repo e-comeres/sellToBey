@@ -4,14 +4,31 @@ import "./Home.css";
 import Category from "./Category";
 import axios from "axios";
 import Footer from "../footer/Footer";
+import { useAuth } from "../context/AuthContext";
 const Home = ({ data }) => {
   const [best, setBest] = useState([]);
   const [flash, setFlash] = useState([]);
+  const { user } = useAuth();
+  const addToPanier = (id) => {
+    const data = {
+      UserId: user.id,
+      productId: id,
+    };
+    axios
+      .post("http://localhost:4000/api/panier/addToPanier", data)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
   useEffect(() => {
     axios
       .get(`http://localhost:4000/api/products/condition/best seller`)
       .then((response) => {
         setBest(response.data);
+        console.log(best);
       })
       .catch((err) => {
         console.error(err);
@@ -50,11 +67,35 @@ const Home = ({ data }) => {
       <div className="grid-container">
         {flash.map((el) => {
           return (
-            <div className="grid-item">
-              <h5>{el.name}</h5>
-              <img src={el.imgUrl} alt="" />
-              <p>{el.category} </p>
-              <p>{el.price}</p>
+            <div
+              className="container"
+              style={{
+                background: `url(${el.imgUrl})`,
+                backgroundSize: "cover",
+                backgroundRepeat: "no-repeat",
+              }}
+            >
+              <div className="overlay">
+                <div className="items" />
+                <div className="items head">
+                  <p>{el.name}</p>
+                  <hr />
+                </div>
+                <div className="items price">
+                  <p className="old">$699</p>
+                  <p className="new">${el.price}</p>
+                </div>
+                <div className="items cart">
+                  <i className="fa fa-shopping-cart" />
+                  <span
+                    onClick={() => {
+                      addToPanier(el.id);
+                    }}
+                  >
+                    ADD TO CART
+                  </span>
+                </div>
+              </div>
             </div>
           );
         })}
@@ -68,11 +109,35 @@ const Home = ({ data }) => {
         <div className="grid-container">
           {best.map((el) => {
             return (
-              <div className="grid-item">
-                <h5>{el.name}</h5>
-                <img src={el.imgUrl} alt="" />
-                <p>{el.category} </p>
-                <p>{el.price}</p>
+              <div
+                className="container"
+                style={{
+                  background: `url(${el.imgUrl})`,
+                  backgroundSize: "cover",
+                  backgroundRepeat: "no-repeat",
+                }}
+              >
+                <div className="overlay">
+                  <div className="items" />
+                  <div className="items head">
+                    <p>{el.name}</p>
+                    <hr />
+                  </div>
+                  <div className="items price">
+                    <p className="old">$699</p>
+                    <p className="new">${el.price}</p>
+                  </div>
+                  <div className="items cart">
+                    <i className="fa fa-shopping-cart" />
+                    <span
+                      onClick={() => {
+                        addToPanier(el.id);
+                      }}
+                    >
+                      ADD TO CART
+                    </span>
+                  </div>
+                </div>
               </div>
             );
           })}
@@ -81,11 +146,35 @@ const Home = ({ data }) => {
         <div className="grid-container">
           {data.map((el) => {
             return (
-              <div className="grid-item">
-                <h5>{el.name}</h5>
-                <img src={el.imgUrl} alt="" />
-                <p>{el.category} </p>
-                <p>{el.price}</p>
+              <div
+                className="container"
+                style={{
+                  background: `url(${el.imgUrl})`,
+                  backgroundSize: "cover",
+                  backgroundRepeat: "no-repeat",
+                }}
+              >
+                <div className="overlay">
+                  <div className="items" />
+                  <div className="items head">
+                    <p>{el.name}</p>
+                    <hr />
+                  </div>
+                  <div className="items price">
+                    <p className="old">$699</p>
+                    <p className="new">${el.price}</p>
+                  </div>
+                  <div className="items cart">
+                    <i className="fa fa-shopping-cart" />
+                    <span
+                      onClick={() => {
+                        addToPanier(el.id);
+                      }}
+                    >
+                      ADD TO CART
+                    </span>
+                  </div>
+                </div>
               </div>
             );
           })}

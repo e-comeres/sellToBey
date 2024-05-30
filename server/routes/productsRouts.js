@@ -1,5 +1,5 @@
 const router = require("express").Router();
-
+const autoriser = require("../middelwares/user.js");
 const {
   getProducts,
   addProduct,

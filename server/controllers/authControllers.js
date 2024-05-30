@@ -21,11 +21,11 @@ async function login(req, res) {
       return res.status(401).json({ message: "Invalid password" });
     }
 
-    const token = jwt.sign({ userId: user.id }, JWT_SECRET, {
+    const token = jwt.sign({ userId: user.id, role: user.role }, JWT_SECRET, {
       expiresIn: "1h",
     });
 
-    return res.status(200).json({ token });
+    return res.status(200).json({ token, user, role: user.role });
   } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "error" });
