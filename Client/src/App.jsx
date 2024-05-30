@@ -5,6 +5,9 @@ import "./App.css";
 
 import Signin from "./component/home/Signin";
 import Home from "./component/home/Home";
+import SellerInterface from "./component/seller/SellerInterface";
+import NewProduct from "./component/seller/NewProduct";
+
 import axios from "axios";
 import OneCategory from "./component/home/OneCategory";
 import Login from "./component/home/Login";
@@ -30,6 +33,8 @@ function App() {
   return (
     <>
       <Router>
+
+
         <AuthProvider>
           <Routes>
             <Route exact path="/" element={<Home data={data} />} />
@@ -37,6 +42,8 @@ function App() {
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/oneCath" element={<OneCategory />} />
             <Route exact path="/panier" element={<Panier />} />
+                  <Route exact path="/seller" element={<SellerInterface/>}/>
+          <Route exact path="/sellerNewProduct" element={<NewProduct/>}/>
           </Routes>
         </AuthProvider>
       </Router>
