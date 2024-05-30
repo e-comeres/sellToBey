@@ -36,6 +36,7 @@ const Category = () => {
           );
         })}
       </div>
+
     </div>
   );
 };

@@ -2,7 +2,7 @@ import React from "react";
 import "./Footer.css";
 const Footer = () => {
   return (
-    <div>
+    <div id="footer1">
       <footer className="footer">
         <div className="footer__parralax">
           <div className="footer__parralax-trees" />

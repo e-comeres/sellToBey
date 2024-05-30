@@ -67,19 +67,35 @@ const Home = ({ data }) => {
       <div className="grid-container">
         {flash.map((el) => {
           return (
-            <div className="grid-item">
-              <h5>{el.name}</h5>
-              <img src={el.imgUrl} alt="" />
-              <p>{el.category} </p>
-              <p>{el.price}</p>
-
-              <button
-                onClick={() => {
-                  addToPanier(el.id);
-                }}
-              >
-                add to list
-              </button>
+            <div
+              className="container"
+              style={{
+                background: `url(${el.imgUrl})`,
+                backgroundSize: "cover",
+                backgroundRepeat: "no-repeat",
+              }}
+            >
+              <div className="overlay">
+                <div className="items" />
+                <div className="items head">
+                  <p>{el.name}</p>
+                  <hr />
+                </div>
+                <div className="items price">
+                  <p className="old">$699</p>
+                  <p className="new">${el.price}</p>
+                </div>
+                <div className="items cart">
+                  <i className="fa fa-shopping-cart" />
+                  <span
+                    onClick={() => {
+                      addToPanier(el.id);
+                    }}
+                  >
+                    ADD TO CART
+                  </span>
+                </div>
+              </div>
             </div>
           );
         })}
@@ -93,18 +109,35 @@ const Home = ({ data }) => {
         <div className="grid-container">
           {best.map((el) => {
             return (
-              <div className="grid-item">
-                <h5>{el.name}</h5>
-                <img src={el.imgUrl} alt="" />
-                <p>{el.category} </p>
-                <p>{el.price}</p>
-                <button
-                  onClick={() => {
-                    addToPanier(el.id);
-                  }}
-                >
-                  add to list
-                </button>
+              <div
+                className="container"
+                style={{
+                  background: `url(${el.imgUrl})`,
+                  backgroundSize: "cover",
+                  backgroundRepeat: "no-repeat",
+                }}
+              >
+                <div className="overlay">
+                  <div className="items" />
+                  <div className="items head">
+                    <p>{el.name}</p>
+                    <hr />
+                  </div>
+                  <div className="items price">
+                    <p className="old">$699</p>
+                    <p className="new">${el.price}</p>
+                  </div>
+                  <div className="items cart">
+                    <i className="fa fa-shopping-cart" />
+                    <span
+                      onClick={() => {
+                        addToPanier(el.id);
+                      }}
+                    >
+                      ADD TO CART
+                    </span>
+                  </div>
+                </div>
               </div>
             );
           })}
@@ -113,18 +146,35 @@ const Home = ({ data }) => {
         <div className="grid-container">
           {data.map((el) => {
             return (
-              <div className="grid-item">
-                <h5>{el.name}</h5>
-                <img src={el.imgUrl} alt="" />
-                <p>{el.category} </p>
-                <p>{el.price}</p>
-                <button
-                  onClick={() => {
-                    addToPanier(el.id);
-                  }}
-                >
-                  add to list
-                </button>
+              <div
+                className="container"
+                style={{
+                  background: `url(${el.imgUrl})`,
+                  backgroundSize: "cover",
+                  backgroundRepeat: "no-repeat",
+                }}
+              >
+                <div className="overlay">
+                  <div className="items" />
+                  <div className="items head">
+                    <p>{el.name}</p>
+                    <hr />
+                  </div>
+                  <div className="items price">
+                    <p className="old">$699</p>
+                    <p className="new">${el.price}</p>
+                  </div>
+                  <div className="items cart">
+                    <i className="fa fa-shopping-cart" />
+                    <span
+                      onClick={() => {
+                        addToPanier(el.id);
+                      }}
+                    >
+                      ADD TO CART
+                    </span>
+                  </div>
+                </div>
               </div>
             );
           })}
