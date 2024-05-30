@@ -10,16 +10,10 @@ db.sequelize = sequelize;
 
 db.Product = require("../models/ProductModels")(sequelize, DataTypes);
 db.User = require("../models/UserModels")(sequelize, DataTypes);
-// db.Movies = require("../models/movies.js")(sequelize, DataTypes);
-// db.Users = require("../models/User.js")(sequelize, DataTypes);
+db.Panier = require("../models/panierModel")(sequelize, DataTypes);
 
-// db.MyList = require("../models/MyList.js")(sequelize, DataTypes);
-
-// db.Users.hasMany(db.Movies);
-// db.Movies.belongsTo(db.Users);
-
-// db.Users.belongsToMany(db.Movies, { through: "MyList" });
-// db.Movies.belongsToMany(db.Users, { through: "MyList" });
+db.User.belongsToMany(db.Product, { through: "Panier" });
+db.Product.belongsToMany(db.User, { through: "Panier" });
 
 sequelize
   .authenticate()

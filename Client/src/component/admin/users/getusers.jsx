@@ -1,6 +1,7 @@
 import React from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation ,useNavigate} from 'react-router-dom'
 export const getusers = () => {
+  const navigate = useNavigate()
   const location=useLocation()
   const {datauser}=location.state
   return (
@@ -8,7 +9,7 @@ export const getusers = () => {
    {datauser.map((el)=>{
 
    return <div>
-      <h2>{el.username}</h2>
+      <h2 onClick={()=>{navigate("/oneuser",{state:{el:el}})}}>{el.username}</h2>
     </div>
    })}
    </>

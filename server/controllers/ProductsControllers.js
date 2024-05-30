@@ -71,4 +71,17 @@ module.exports = {
         res.send(err);
       });
   },
+  getByCondition: (req, res) => {
+    db.Product.findAll({
+      where: {
+        condition: req.params.condition,
+      },
+    })
+      .then((data) => {
+        res.send(data);
+      })
+      .catch((err) => {
+        res.send(err);
+      });
+  },
 };
