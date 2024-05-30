@@ -7,17 +7,19 @@ import { useNavigate } from "react-router-dom";
 const Signin = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [role, setRole] = useState("");
+  const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
   const navigate = useNavigate();
   const signup = async () => {
     try {
       const response = await axios.post(
         "http://localhost:4000/api/auth/register",
-        { username: username, password: password }
+        { username: username, email: email, password: password, role: role }
       );
       setMessage("Signup successful!");
       console.log(message);
-      navigate("/");
+      navigate("/login");
     } catch (error) {
       console.log(error);
       setMessage("Signup failed. Please try again.");
@@ -63,6 +65,19 @@ const Signin = () => {
             </div>
             <div className="floating-label">
               <input
+                placeholder="email"
+                type="text"
+                name="email"
+                id="email"
+                autoComplete="off"
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+              />
+              <label htmlFor="username">email:</label>
+            </div>
+            <div className="floating-label">
+              <input
                 placeholder="Password"
                 type="password"
                 name="password"
@@ -72,7 +87,21 @@ const Signin = () => {
                   setPassword(e.target.value);
                 }}
               />
+
               <label htmlFor="password">Password:</label>
+            </div>
+            <div className="floating-label">
+              <input
+                placeholder="Role"
+                type="role"
+                name="role"
+                id="role"
+                autoComplete="off"
+                onChange={(e) => {
+                  setRole(e.target.value);
+                }}
+              />
+              <label htmlFor="password">Role:</label>
             </div>
             <button onClick={signup}>Sign up</button>
             <button
@@ -80,7 +109,7 @@ const Signin = () => {
                 navigate("/login");
               }}
             >
-              log in{" "}
+              log in
             </button>
           </form>
           {message && <p>{message}</p>}
