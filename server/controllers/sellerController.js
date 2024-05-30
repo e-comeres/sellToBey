@@ -2,7 +2,7 @@ const db = require("../database/index");
 
 
 module.exports = {
-    getSeller: (req, res) => {
+    getSellerProd: (req, res) => {
         db.Product.findAll()
           .then((data) => {
             console.log(data)
@@ -12,7 +12,7 @@ module.exports = {
             res.json(err);
           });
       },
-      getOneSeller: (req, res) => {
+      getOneSellerProd: (req, res) => {
         db.Product.findOne({
           where: {
             id: req.params.id,
@@ -25,7 +25,7 @@ module.exports = {
             res.json(err);
           });
       },
-    addSeller: (req, res) => {
+    addSellerProd: (req, res) => {
       db.Product.create(req.body)
         .then((data) => {
           res.json(data);
@@ -34,7 +34,7 @@ module.exports = {
           res.json(err);
         });
     },
-    removeSeller: (req, res) => {
+    removeSellerProd: (req, res) => {
       db.Product.destroy({
         where: {
           id: req.params.id,
@@ -47,7 +47,7 @@ module.exports = {
           res.json(err);
         });
     },
-    updateSeller: (req, res) => {
+    updateSellerProd: (req, res) => {
       db.Product.update(req.body, {
         where: {
           id: req.params.id,

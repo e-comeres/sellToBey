@@ -1,17 +1,17 @@
 const SellerRoute = require("express").Router();
 
 const {
-  getSeller,
-  getOneSeller,
-  addSeller,
-  updateSeller,
-  removeSeller,
+  getSellerProd,
+  getOneSellerProd,
+  addSellerProd,
+  updateSellerProd,
+  removeSellerProd,
 } = require("../controllers/sellerController");
 
-SellerRoute.post("/seller", addSeller);
-SellerRoute.put("/seller/:id", updateSeller);
-SellerRoute.delete("/seller/:id", removeSeller);
-SellerRoute.get("/seller", getSeller);
-SellerRoute.get("/seller/:id", getOneSeller);
+SellerRoute.post("/seller", addSellerProd);
+SellerRoute.put("/seller/:id", updateSellerProd);
+SellerRoute.delete("/seller/:id", removeSellerProd);
+SellerRoute.get("/seller", getSellerProd);
+SellerRoute.get("/seller/:id", getOneSellerProd);
 
 module.exports = SellerRoute;
