@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 const AuthContext = createContext();
-
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(
     JSON.parse(localStorage.getItem("user")) || {}
@@ -13,9 +12,7 @@ export const AuthProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("seller")) || {}
   );
   const [token, setToken] = useState(localStorage.getItem("token") || "");
-
   const navigate = useNavigate();
-
   const loginAction = async (data) => {
     try {
       const response = await axios.post(
@@ -23,10 +20,9 @@ export const AuthProvider = ({ children }) => {
         data
       );
       console.log(response);
-
+      
       if (response.status === 200) {
         toast.success(response.data.message);
-
         if (response.data.seller) {
           setSeller(response.data.seller);
           localStorage.setItem("seller", JSON.stringify(response.data.seller));
@@ -38,7 +34,6 @@ export const AuthProvider = ({ children }) => {
           setToken(response.data.token);
           localStorage.setItem("token", response.data.token);
         }
-
         if (response.data.seller) {
           navigate("/seller");
         } else {
@@ -50,7 +45,6 @@ export const AuthProvider = ({ children }) => {
       // toast.error(err.response.data.message);
     }
   };
-
   const logOut = () => {
     setUser({});
     setSeller({});
@@ -61,14 +55,12 @@ export const AuthProvider = ({ children }) => {
     toast.success("Logged out successfully");
     navigate("/login");
   };
-
   return (
     <AuthContext.Provider value={{ token, user, seller, loginAction, logOut }}>
       {children}
     </AuthContext.Provider>
   );
 };
-
 export const useAuth = () => {
   return useContext(AuthContext);
 };

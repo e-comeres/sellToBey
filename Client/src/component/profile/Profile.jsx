@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Profile.css';
 import Navbar from '../navbar/Navbar';
-import Footer from '../footer/Footer'
+import { useNavigate } from 'react-router-dom';
 
 const Profile = () => {
     const [profile, setProfile] = useState({
@@ -16,10 +16,11 @@ const Profile = () => {
         newPassword: '',
         confirmNewPassword: '',
     });
+    const navigate=useNavigate()
 
     useEffect(() => {
        
-        axios.get('/api/profile')
+        axios.get(`http://localhost:4000/api/${seller.id}`)
             .then(response => {
                 setProfile(response.data);
             })
@@ -88,14 +89,13 @@ const Profile = () => {
                         </div>
                         <div className="button-group">
                             <button type="button" onClick={() => alert('Edit canceled.')} className="button">Cancel</button>
-                            <button type="submit" className="button save-button">Save Changes</button>
+                            <button type="submit" className="button save-button" onClick={}>Save Changes</button>
                         </div>
                     </form>
                 </div>
             </div>
             </div>
         </div>
-        <Footer/>
         </div>
     );
 };

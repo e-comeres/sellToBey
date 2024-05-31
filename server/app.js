@@ -7,6 +7,7 @@ const routerusers = require("./routes/usersRoutes");
 const SellerRouter = require("./routes/sellerRoute");
 const routerPa = require("./routes/PanierRoutes.js");
 const routerAs = require("./routes/sellerAuth.js");
+const sellerRoute = require('./routes/oneSellerRoute.js')
 const PORT = 4000;
 const app = express();
 
@@ -18,7 +19,9 @@ app.use("/api/auth", routerAuth);
 app.use("/api/seller", routerAs);
 app.use("/api/users", routerusers);
 app.use("/api", SellerRouter);
+app.use("/api", sellerRoute);
 app.use("/api/panier", routerPa);
+
 
 app.listen(PORT, () => {
   console.log(`Server listening at http://localhost:${PORT}`);
