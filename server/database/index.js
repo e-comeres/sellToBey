@@ -10,7 +10,7 @@ db.sequelize = sequelize;
 
 db.Product = require("../models/ProductModels")(sequelize, DataTypes);
 db.User = require("../models/UserModels")(sequelize, DataTypes);
-
+db.admin=require("../models/adminModel")(sequelize, DataTypes)
 db.Seller = require("../models/sellerModel")(sequelize, DataTypes);
 
 db.Seller.hasMany(db.Product);

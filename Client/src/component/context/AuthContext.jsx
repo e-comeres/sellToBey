@@ -12,17 +12,21 @@ export const AuthProvider = ({ children }) => {
   const [seller, setSeller] = useState(
     JSON.parse(localStorage.getItem("seller")) || {}
   );
+  const [admin, setAdmin] = useState(
+    JSON.parse(localStorage.getItem("admin")) || {}
+  );
   const [token, setToken] = useState(localStorage.getItem("token") || "");
 
   const navigate = useNavigate();
 
   const loginAction = async (data) => {
     try {
+      console.log("hello");
       const response = await axios.post(
         "http://localhost:4000/api/auth/login",
         data
       );
-      console.log(response);
+      console.log("admin",response);
 
       if (response.status === 200) {
         toast.success(response.data.message);
@@ -31,22 +35,29 @@ export const AuthProvider = ({ children }) => {
           setSeller(response.data.seller);
           localStorage.setItem("seller", JSON.stringify(response.data.seller));
           setToken(response.data.tokenSeller);
-          localStorage.setItem("token", response.data.tokenSeller);
-        } else {
+          localStorage.setItem("token", response.data.tokenSeller)
+          navigate("/seller");
+        }
+        else if(response.data.admin){
+          setAdmin(response.data.admin)
+          localStorage.setItem("admin",JSON.stringify(response.data.admin))
+          setToken(response.data.tokenadmin)
+          localStorage.setItem("token",response.data.tokenadmin)
+          navigate("/admin")
+        }
+        
+        else {
           setUser(response.data.user);
           localStorage.setItem("user", JSON.stringify(response.data.user));
           setToken(response.data.token);
-          localStorage.setItem("token", response.data.token);
-        }
-
-        if (response.data.seller) {
-          navigate("/seller");
-        } else {
+          localStorage.setItem("token", response.data.token)
           navigate("/");
         }
+
+       
       }
     } catch (err) {
-      console.error(err);
+      console.error(err)
       // toast.error(err.response.data.message);
     }
   };
@@ -54,16 +65,18 @@ export const AuthProvider = ({ children }) => {
   const logOut = () => {
     setUser({});
     setSeller({});
+    setAdmin({})
     setToken("");
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     localStorage.removeItem("seller");
+    localStorage.removeItem("admin");
     toast.success("Logged out successfully");
     navigate("/login");
   };
 
   return (
-    <AuthContext.Provider value={{ token, user, seller, loginAction, logOut }}>
+    <AuthContext.Provider value={{ token, user,admin, seller, loginAction, logOut }}>
       {children}
     </AuthContext.Provider>
   );
