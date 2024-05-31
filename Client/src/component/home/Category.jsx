@@ -20,7 +20,10 @@ const Category = () => {
   };
   return (
     <div>
-      <div className="cats-container">
+      <div
+        className="cats-container"
+        // style={{ marginRight: "150px", marginLeft: "250px" }}
+      >
         {cats.map((cat) => {
           return (
             <div>
@@ -36,7 +39,6 @@ const Category = () => {
           );
         })}
       </div>
-
     </div>
   );
 };
