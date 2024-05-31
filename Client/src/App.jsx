@@ -5,30 +5,24 @@ import "./App.css";
 
 import Signin from "./component/home/Signin";
 import Home from "./component/home/Home";
-<<<<<<< HEAD
+
 import SellerInterface from "./component/seller/SellerInterface";
 import NewProduct from "./component/seller/NewProduct";
 import OneProduct from "./component/seller/OneProduct";
-=======
 import Admin from "./component/admin/adminapp";
 import Getprodact from "./component/admin/prodacts/getprodact";
 import Getusers  from "./component/admin/users/getusers";
 import Getoneusers from "./component/admin/users/getoneusers";
+import EditSellerProduct from "./component/seller/EditSellerProduct";
 // import Getseller  from "./component/admin/seller/getseller";
-import SellerInterface from "./component/seller/SellerInterface";
-import NewProduct from "./component/seller/NewProduct";
->>>>>>> e1c39bdbafcb5b32f130c4e68172aa57328d749d
-
+import Profile from "./component/profile/Profile";
 import axios from "axios";
 import OneCategory from "./component/home/OneCategory";
 import Login from "./component/home/Login";
 import { AuthProvider } from "./component/context/AuthContext";
 import { Toaster } from "react-hot-toast";
 import Panier from "./component/pannier/Panier";
-<<<<<<< HEAD
-import EditSellerProduct from "./component/seller/EditSellerProduct";
-=======
->>>>>>> e1c39bdbafcb5b32f130c4e68172aa57328d749d
+
 
 function App() {
   const [data, setData] = useState([]);
@@ -49,10 +43,7 @@ function App() {
     <>
       <Router>
 
-<<<<<<< HEAD
-=======
 
->>>>>>> e1c39bdbafcb5b32f130c4e68172aa57328d749d
         <AuthProvider>
           <Routes>
             <Route exact path="/" element={<Home data={data} />} />
@@ -60,25 +51,19 @@ function App() {
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/oneCath" element={<OneCategory />} />
             <Route exact path="/panier" element={<Panier />} />
-<<<<<<< HEAD
             <Route exact path="/seller" element={<SellerInterface/>}/>
             <Route exact path="/sellerNewProduct" element={<NewProduct/>}/>
             <Route exact path="/sellerOneProduct" element={<OneProduct/>}/>
             <Route exact path="/sellerEdit" element={<EditSellerProduct/>}/>
-          </Routes>
-        </AuthProvider>
-=======
-            <Route exact path="/admin" element={<Admin/>}/>
+            <Route exact path="/admin" element={<Admin/>}/> 
+            <Route exact path="/profile" element={<Profile/>}/> 
           <Route exact path="/allprodact" element={<Getprodact/>} />
           <Route exact path="/alluseres" element={<Getusers/>} />
           <Route exact path="/oneuser" element={<Getoneusers/>} />
           {/* <Route exact path="/allseller" element={<Getseller/>} /> */}
-                  <Route exact path="/seller" element={<SellerInterface/>}/>
-          <Route exact path="/sellerNewProduct" element={<NewProduct/>}/>
           </Routes>
         </AuthProvider>
 
->>>>>>> e1c39bdbafcb5b32f130c4e68172aa57328d749d
       </Router>
       <Toaster />
     </>

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Navbar from '../navbar/Navbar';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Footer from '../footer/Footer'
 
 function SellerInterface() {
   const [sellerProducts, setSellerProducts] = useState([]);
@@ -44,6 +45,7 @@ function SellerInterface() {
         </ul>
       </div>
     </div>
+    <Footer/>
     </div>
   );
 }

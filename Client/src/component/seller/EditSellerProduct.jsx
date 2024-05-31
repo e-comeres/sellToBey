@@ -2,13 +2,14 @@ import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Navbar from '../navbar/Navbar';
 import axios from 'axios';
+import Footer from '../footer/Footer';
 
 const EditSellerProduct = () => {
     const location = useLocation();
-    const { product: locationProduct } = location.state; // Renamed variable
+    const { product: locationProduct } = location.state; 
     const [editedProduct, setEditedProduct] = useState(locationProduct);
     const [file, setFile] = useState(null);
-    const [url, setUrl] = useState(locationProduct.imgUrl); // Initialize with existing image URL
+    const [url, setUrl] = useState(locationProduct.imgUrl); 
     const navigate = useNavigate(); 
 
     const updateProduct = () => {
@@ -106,6 +107,7 @@ const EditSellerProduct = () => {
                     <button onClick={confirmUpdate}>Update</button>
                 </div>
             </div>
+            <Footer/>
         </div>
     );
 };

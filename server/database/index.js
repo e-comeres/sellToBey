@@ -10,19 +10,10 @@ db.sequelize = sequelize;
 
 db.Product = require("../models/ProductModels")(sequelize, DataTypes);
 db.User = require("../models/UserModels")(sequelize, DataTypes);
-<<<<<<< HEAD
 db.Seller = require("../models/sellerModel")(sequelize, DataTypes);
 
 db.Seller.hasMany(db.Product)
 db.Product.belongsTo(db.Seller)
-=======
-
-db.Seller = require("../models/sellerModel")(sequelize, DataTypes);
-
-db.Seller.hasMany(db.Product);
-db.Product.belongsTo(db.Seller);
-
->>>>>>> e1c39bdbafcb5b32f130c4e68172aa57328d749d
 db.Panier = require("../models/panierModel")(sequelize, DataTypes);
 
 db.User.belongsToMany(db.Product, { through: "Panier" });

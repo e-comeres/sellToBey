@@ -2,6 +2,7 @@ import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Navbar from '../navbar/Navbar';
 import axios from 'axios';
+import Footer from '../footer/Footer'
 import './OneProduct.css';
 
 const OneProduct = () => {
@@ -59,6 +60,7 @@ const OneProduct = () => {
                     </div>
                 </div>
             </div>
+            <Footer/>
         </div>
     );
 };
