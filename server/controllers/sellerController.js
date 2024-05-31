@@ -60,5 +60,28 @@ module.exports = {
           res.json(err);
         });
     },
+    getSeller: (req, res) => {
+      db.Seller.findAll()
+        .then((data) => {
+          console.log(data)
+          res.json(data);
+        })
+        .catch((err) => {
+          res.json(err);
+        });
+    },
+    removeSeller: (req, res) => {
+      db.Seller.destroy({
+        where: {
+          id: req.params.id,
+        },
+      })
+        .then((data) => {
+          res.json(data);
+        })
+        .catch((err) => {
+          res.json(err);
+        });
+    }
   };
   
