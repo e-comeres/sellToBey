@@ -9,13 +9,15 @@ const Home = ({ data }) => {
   const [best, setBest] = useState([]);
   const [flash, setFlash] = useState([]);
   const { user } = useAuth();
+  console.log(user);
   const addToPanier = (id) => {
     const data = {
       UserId: user.id,
       productId: id,
     };
+    console.log(data, "data");
     axios
-      .post("http://localhost:4000/api/panier/addToPanier", data)
+      .post("http://localhost:4000/api/panier/usercart", data)
       .then((res) => {
         console.log(res);
       })

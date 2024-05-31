@@ -16,8 +16,8 @@ db.Seller.hasMany(db.Product)
 db.Product.belongsTo(db.Seller)
 db.Panier = require("../models/panierModel")(sequelize, DataTypes);
 
-db.User.belongsToMany(db.Product, { through: "Panier" });
-db.Product.belongsToMany(db.User, { through: "Panier" });
+db.User.belongsToMany(db.Product, { through: db.Panier });
+db.Product.belongsToMany(db.User, { through: db.Panier });
 
 sequelize
   .authenticate()
