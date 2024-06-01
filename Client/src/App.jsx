@@ -11,6 +11,7 @@ import NewProduct from "./component/seller/NewProduct";
 import OneProduct from "./component/seller/OneProduct";
 import Admin from "./component/admin/adminapp";
 import Getprodact from "./component/admin/prodacts/getprodact";
+import Getoneprodact from "./component/admin/prodacts/getoneprodact"
 import Getusers  from "./component/admin/users/getusers";
 import Getoneusers from "./component/admin/users/getoneusers";
 import EditSellerProduct from "./component/seller/EditSellerProduct";
@@ -51,16 +52,23 @@ function App() {
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/oneCath" element={<OneCategory />} />
             <Route exact path="/panier" element={<Panier />} />
+            <Route exact path="/admin" element={<Admin /> }/>
             <Route exact path="/seller" element={<SellerInterface/>}/>
             <Route exact path="/sellerNewProduct" element={<NewProduct/>}/>
             <Route exact path="/sellerOneProduct" element={<OneProduct/>}/>
             <Route exact path="/sellerEdit" element={<EditSellerProduct/>}/>
             <Route exact path="/admin" element={<Admin/>}/> 
             <Route exact path="/profile" element={<Profile/>}/> 
+
           <Route exact path="/allprodact" element={<Getprodact/>} />
+          <Route exact path="/oneprodact" element={<Getoneprodact/>} />
           <Route exact path="/alluseres" element={<Getusers/>} />
           <Route exact path="/oneuser" element={<Getoneusers/>} />
           {/* <Route exact path="/allseller" element={<Getseller/>} /> */}
+
+          <Route exact path="/seller" element={<SellerInterface/>}/>
+          <Route exact path="/sellerNewProduct" element={<NewProduct/>}/>
+
           </Routes>
         </AuthProvider>
 

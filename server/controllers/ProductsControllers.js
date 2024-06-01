@@ -39,10 +39,10 @@ module.exports = {
       },
     })
       .then((data) => {
-        res.send(data);
+        res.json(data);
       })
       .catch((err) => {
-        res.send(err);
+        res.json(err);
       });
   },
   update: (req, res) => {
