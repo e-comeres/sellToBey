@@ -7,6 +7,7 @@ const routerusers = require("./routes/usersRoutes");
 const SellerRouter = require("./routes/sellerRoute");
 const routerPa = require("./routes/PanierRoutes.js");
 const routerAs = require("./routes/sellerAuth.js");
+const routeradmin=require("./routes/adminRoutes.js")
 const PORT = 4000;
 const app = express();
 
@@ -17,6 +18,9 @@ app.use("/api", router);
 app.use("/api/auth", routerAuth);
 app.use("/api/seller", routerAs);
 app.use("/api/users", routerusers);
+
+app.use("/api/admin",routeradmin)
+
 app.use("/api", SellerRouter);
 app.use("/api/panier", routerPa);
 
