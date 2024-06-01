@@ -1,27 +1,31 @@
 import axios from 'axios'
 import React from 'react'
-import { useLocation,useNavigate } from 'react-router-dom'
+import { redirect, useLocation,useNavigate } from 'react-router-dom'
 
 export const getoneusers = () => {
   const navigate = useNavigate()
   const location=useLocation()
-  const {el,refresh,setrefresh}=location.state
+  const {el}=location.state
 const delet=()=>{
+  const confirmDelete = window.confirm("Are you sure you want to delete this user?");
+  if (confirmDelete) {
   axios.delete(`http://localhost:4000/api/users/users/${el.id}`)
   .then(()=>{
     console.log("deleted");
-    setrefresh(!refresh)
+    navigate("/admin")
+    
   })
   .catch((err)=>{
     console.log(err);
   })
-}
+}}
 
   return (
    <>
    <h2>{el.username}</h2>
    <h2>{el.email}</h2>
-   <button onClick={()=>{delet(),navigate("/alluseres")}}>delet</button>
+   <button onClick={()=>{delet()}}>delete</button>
+   <button onClick={()=>{navigate("/admin")}}>back to admin page</button>
    </>
   )
 }

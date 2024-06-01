@@ -64,10 +64,10 @@ module.exports = {
       db.Seller.findAll()
         .then((data) => {
           console.log(data)
-          res.json(data);
+          res.send(data);
         })
         .catch((err) => {
-          res.json(err);
+          res.send(err);
         });
     },
     removeSeller: (req, res) => {
