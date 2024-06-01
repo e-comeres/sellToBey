@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import axios from "axios";
 import Navbar from "../navbar/Navbar";
 import { useNavigate } from "react-router-dom";
-
-// import './NewProduct.css';
+import Footer from '../footer/Footer'
+import './NewProduct.css';
 
 function NewProduct() {
   const [newProduct, setNewProduct] = useState({
@@ -133,6 +133,7 @@ function NewProduct() {
           </button>
         </form>
       </div>
+      <Footer/>
     </div>
   );
 }

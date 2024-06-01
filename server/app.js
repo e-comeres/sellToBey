@@ -10,15 +10,18 @@ const routerAs = require("./routes/sellerAuth.js");
 const routeradmin=require("./routes/adminRoutes.js")
 const PORT = 4000;
 const app = express();
+
+
 app.use(express.json());
 app.use(cors());
 app.use("/api", router);
 app.use("/api/auth", routerAuth);
 app.use("/api/seller", routerAs);
 app.use("/api/users", routerusers);
-app.use("/api/admin",routeradmin)
-app.use("/api", SellerRouter);
 
+app.use("/api/admin",routeradmin)
+
+app.use("/api", SellerRouter);
 app.use("/api/panier", routerPa);
 
 app.listen(PORT, () => {
