@@ -3,16 +3,19 @@ const bcrypt = require("bcrypt");
 // const User = require("../models/UserModels.js");
 const db = require("../database/index.js");
 const { JWT_SECRET } = require("../../config");
+const { where } = require("sequelize");
 
 async function login(req, res) {
-  const { username, password, email } = req.body;
+  const { username,email,password } = req.body;
 
   try {
     //user
     const user = await db.User.findOne({ where: { username } });
     //seller
     const seller = await db.Seller.findOne({ where: { username } });
-
+    //admin
+    const admin= await db.admin.findOne({where:{username}})
+    console.log(user,admin,seller);
     //user
     if (user) {
       const isValidPassword = await bcrypt.compare(password, user.password);
@@ -40,7 +43,21 @@ async function login(req, res) {
         }
       );
       return res.status(200).json({ tokenSeller, seller });
-    } else {
+    }else if (admin){
+     const validpassword= await bcrypt.compare(password,admin.password)
+    //  if(!validpassword){
+    //   return res.status(401).json({message :"invalid password"})
+    //  }
+     const tokenadmin= jwt.sign(
+      {adminId:admin.id,role:admin.role},
+      JWT_SECRET,
+      {
+        expiresIn: "1h",
+      }
+     )
+     return res.status(200).json({tokenadmin,admin})
+    }
+     else {
       return res.status(404).json({ message: "not found" });
     }
   } catch (error) {
@@ -61,7 +78,16 @@ async function register(req, res) {
         password: hashedPassword,
         role: "user",
       });
-    } else {
+    }
+   else if(role==="admin") {
+  const admin= await db.admin.create({
+    username,
+    email,
+    password:hashedPassword,
+    role: "admin"
+  })
+    }
+     else {
       const seller = await db.Seller.create({
         username,
         email,
