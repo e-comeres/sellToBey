@@ -2,9 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../navbar/Navbar';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import Footer from '../footer/Footer'
 
 function SellerInterface() {
   const [sellerProducts, setSellerProducts] = useState([]);
+  const navigate = useNavigate()
 
   useEffect(() => {
     axios.get(`http://localhost:4000/api/seller`)
@@ -35,13 +38,14 @@ function SellerInterface() {
           {sellerProducts.filter(product => product.SellerId === SellerId).map(product => (
             <li key={product.id} className="product-item">
               <h2 className="product-name">{product.name}</h2>
-              <img src={product.imgUrl} alt="product" className="product-image" />
-              <h4 className="product-category">{product.category}</h4>
+              <img onClick={()=>navigate('/sellerOneProduct',{state:{product:product}})}  src={product.imgUrl} alt="product" className="product-image" />
+
             </li>
           ))}
         </ul>
       </div>
     </div>
+    <Footer/>
     </div>
   );
 }
