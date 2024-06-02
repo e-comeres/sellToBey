@@ -11,7 +11,9 @@ import NewProduct from "./component/seller/NewProduct";
 import OneProduct from "./component/seller/OneProduct";
 import Admin from "./component/admin/adminapp";
 import Getprodact from "./component/admin/prodacts/getprodact";
-import Getusers from "./component/admin/users/getusers";
+
+import Getoneprodact from "./component/admin/prodacts/getoneprodact"
+import Getusers  from "./component/admin/users/getusers";
 import Getoneusers from "./component/admin/users/getoneusers";
 import EditSellerProduct from "./component/seller/EditSellerProduct";
 // import Getseller  from "./component/admin/seller/getseller";
@@ -50,6 +52,7 @@ function App() {
             <Route exact path="/login" element={<Login />} />
             <Route exact path="/oneCath" element={<OneCategory />} />
             <Route exact path="/panier" element={<Panier />} />
+
             <Route exact path="/seller" element={<SellerInterface />} />
             <Route exact path="/sellerNewProduct" element={<NewProduct />} />
             <Route exact path="/sellerOneProduct" element={<OneProduct />} />

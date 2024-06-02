@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Profile.css";
@@ -5,7 +6,6 @@ import Navbar from "../navbar/Navbar";
 import Footer from "../footer/Footer";
 import { useAuth } from "../context/AuthContext";
 import toast from "react-hot-toast";
-
 const Profile = () => {
   const { user, setUser } = useAuth();
   const [profile, setProfile] = useState({
@@ -18,6 +18,7 @@ const Profile = () => {
     newPassword: "",
     confirmNewPassword: "",
   });
+
 
   const change = (e) => {
     const { name, value } = e.target;
@@ -152,6 +153,7 @@ const Profile = () => {
       <Footer />
     </div>
   );
+
 };
 
 export default Profile;
