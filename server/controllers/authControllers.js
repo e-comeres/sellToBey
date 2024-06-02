@@ -6,7 +6,7 @@ const { JWT_SECRET } = require("../../config");
 const { where } = require("sequelize");
 
 async function login(req, res) {
-  const { username,email,password } = req.body;
+  const { username, email, password } = req.body;
 
   try {
     //user
@@ -14,8 +14,8 @@ async function login(req, res) {
     //seller
     const seller = await db.Seller.findOne({ where: { username } });
     //admin
-    const admin= await db.admin.findOne({where:{username}})
-    console.log(user,admin,seller);
+    const admin = await db.admin.findOne({ where: { username } });
+    console.log(user, admin, seller);
     //user
     if (user) {
       const isValidPassword = await bcrypt.compare(password, user.password);
@@ -43,21 +43,20 @@ async function login(req, res) {
         }
       );
       return res.status(200).json({ tokenSeller, seller });
-    }else if (admin){
-     const validpassword= await bcrypt.compare(password,admin.password)
-    //  if(!validpassword){
-    //   return res.status(401).json({message :"invalid password"})
-    //  }
-     const tokenadmin= jwt.sign(
-      {adminId:admin.id,role:admin.role},
-      JWT_SECRET,
-      {
-        expiresIn: "1h",
-      }
-     )
-     return res.status(200).json({tokenadmin,admin})
-    }
-     else {
+    } else if (admin) {
+      const validpassword = await bcrypt.compare(password, admin.password);
+      //  if(!validpassword){
+      //   return res.status(401).json({message :"invalid password"})
+      //  }
+      const tokenadmin = jwt.sign(
+        { adminId: admin.id, role: admin.role },
+        JWT_SECRET,
+        {
+          expiresIn: "1h",
+        }
+      );
+      return res.status(200).json({ tokenadmin, admin });
+    } else {
       return res.status(404).json({ message: "not found" });
     }
   } catch (error) {
@@ -78,16 +77,14 @@ async function register(req, res) {
         password: hashedPassword,
         role: "user",
       });
-    }
-   else if(role==="admin") {
-  const admin= await db.admin.create({
-    username,
-    email,
-    password:hashedPassword,
-    role: "admin"
-  })
-    }
-     else {
+    } else if (role === "admin") {
+      const admin = await db.admin.create({
+        username,
+        email,
+        password: hashedPassword,
+        role: "admin",
+      });
+    } else {
       const seller = await db.Seller.create({
         username,
         email,
@@ -102,5 +99,39 @@ async function register(req, res) {
     return res.status(500).json({ message: "error" });
   }
 }
+async function UpdateUser(req, res) {
+  const { id } = req.params;
+  console.log(id);
+  const { username, email, password } = req.body;
+  if (!username && !email && !password)
+    return res.status(400).json({ message: "No data to update" });
+  try {
+    const updateFields = {};
+    if (username) updateFields.username = username;
 
-module.exports = { login, register };
+    if (email) updateFields.email = email;
+    if (password) {
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(password, salt);
+      updateFields.password = hashedPassword;
+    }
+    const result = await db.User.update(updateFields, {
+      where: {
+        id: id,
+      },
+    });
+
+    if (result[0] === 0) {
+      console.log("No record found to update");
+    } else {
+      console.log("Record updated successfully");
+    }
+
+    return res
+      .status(200)
+      .json({ message: "success updated", results: result });
+  } catch (err) {
+    return res.status(400).json({ error: err.message });
+  }
+}
+module.exports = { login, register, UpdateUser };

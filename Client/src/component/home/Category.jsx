@@ -10,7 +10,7 @@ const Category = () => {
     axios
       .get(`http://localhost:4000/api/products/category/${category}`)
       .then((response) => {
-        console.log(response.data);
+       
         setCat(response.data);
         navigate("/oneCath", { state: { cat: response.data } });
       })

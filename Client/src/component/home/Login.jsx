@@ -12,8 +12,7 @@ const Login = () => {
 
   const navigate = useNavigate();
   const { loginAction } = useAuth();
-  console.log("hola", loginAction);
-  console.log("hola", useAuth);
+
   const handleLogin = async (e) => {
     e.preventDefault();
     loginAction({ username: username, email: email, password: password });
