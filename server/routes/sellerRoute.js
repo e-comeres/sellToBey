@@ -16,5 +16,8 @@ SellerRoute.get("/seller/:id", getOneSellerProd);
 SellerRoute.post("/seller", addSellerProd);
 SellerRoute.put("/seller/:id", updateSellerProd);
 SellerRoute.delete("/seller/:id", removeSellerProd);
+
 SellerRoute.delete("/seller/seller/:id", removeSeller);
 module.exports = SellerRoute;
+
+

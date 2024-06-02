@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import Navbar from "../navbar/Navbar";
 import { useNavigate } from "react-router-dom";
+
 import Footer from "../footer/Footer";
 // import './NewProduct.css';
 
