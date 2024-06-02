@@ -15,7 +15,8 @@ import Getoneprodact from "./component/admin/prodacts/getoneprodact"
 import Getusers  from "./component/admin/users/getusers";
 import Getoneusers from "./component/admin/users/getoneusers";
 import EditSellerProduct from "./component/seller/EditSellerProduct";
-// import Getseller  from "./component/admin/seller/getseller";
+import Getseller  from "./component/admin/seller/getseller";
+import Getoneseller from "./component/admin/seller/getoneseller"
 import Profile from "./component/profile/Profile";
 import axios from "axios";
 import OneCategory from "./component/home/OneCategory";
@@ -64,8 +65,10 @@ function App() {
           <Route exact path="/oneprodact" element={<Getoneprodact/>} />
           <Route exact path="/alluseres" element={<Getusers/>} />
           <Route exact path="/oneuser" element={<Getoneusers/>} />
-          {/* <Route exact path="/allseller" element={<Getseller/>} /> */}
+          <Route exact path="/allseller" element={<Getseller/>} />
+          <Route exact path="/oneseller" element={<Getoneseller/>} />
 
+          
           <Route exact path="/seller" element={<SellerInterface/>}/>
           <Route exact path="/sellerNewProduct" element={<NewProduct/>}/>
 

@@ -23,13 +23,13 @@ export const AuthProvider = ({ children }) => {
         "http://localhost:4000/api/auth/login",
         data
       );
-<<<<<<< HEAD
+
       console.log(response);
       
-=======
+
       console.log("admin",response);
 
->>>>>>> 7fb96a18019b9b6aba096f24a5bead8cc5d3c62d
+
       if (response.status === 200) {
         toast.success(response.data.message);
         if (response.data.seller) {
@@ -51,15 +51,15 @@ export const AuthProvider = ({ children }) => {
           setUser(response.data.user);
           localStorage.setItem("user", JSON.stringify(response.data.user));
           setToken(response.data.token);
-<<<<<<< HEAD
+
           localStorage.setItem("token", response.data.token);
         }
         if (response.data.seller) {
           navigate("/seller");
         } else {
-=======
+
           localStorage.setItem("token", response.data.token)
->>>>>>> 7fb96a18019b9b6aba096f24a5bead8cc5d3c62d
+
           navigate("/");
         }
 
