@@ -12,11 +12,11 @@ import OneProduct from "./component/seller/OneProduct";
 import Admin from "./component/admin/adminapp";
 import Getprodact from "./component/admin/prodacts/getprodact";
 
-import Getoneprodact from "./component/admin/prodacts/getoneprodact"
-import Getusers  from "./component/admin/users/getusers";
+import Getoneprodact from "./component/admin/prodacts/getoneprodact";
+import Getusers from "./component/admin/users/getusers";
 import Getoneusers from "./component/admin/users/getoneusers";
 import EditSellerProduct from "./component/seller/EditSellerProduct";
-// import Getseller  from "./component/admin/seller/getseller";
+import Getseller from "./component/admin/seller/getseller";
 import Profile from "./component/profile/Profile";
 import axios from "axios";
 import OneCategory from "./component/home/OneCategory";
@@ -62,7 +62,7 @@ function App() {
             <Route exact path="/allprodact" element={<Getprodact />} />
             <Route exact path="/alluseres" element={<Getusers />} />
             <Route exact path="/oneuser" element={<Getoneusers />} />
-            {/* <Route exact path="/allseller" element={<Getseller/>} /> */}
+            <Route exact path="/allseller" element={<Getseller />} />
           </Routes>
         </AuthProvider>
       </Router>

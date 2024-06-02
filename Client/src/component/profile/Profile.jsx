@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./Profile.css";
@@ -19,7 +18,6 @@ const Profile = () => {
     confirmNewPassword: "",
   });
 
-
   const change = (e) => {
     const { name, value } = e.target;
     setPasswords({ ...passwords, [name]: value });
@@ -36,6 +34,7 @@ const Profile = () => {
       .then((response) => {
         localStorage.setItem("user", JSON.stringify({ ...user, ...data }));
         setUser((oldUser) => ({ ...oldUser, ...data }));
+        console.log(response.data);
         toast.success(response.data.message);
       })
       .catch((error) => {
@@ -47,113 +46,44 @@ const Profile = () => {
   return (
     <div>
       <Navbar />
-      <div id="pf">
-        <div className="container">
-          <div className="profile-container">
-            <div className="header">
-              <div>Home / My Account</div>
-              <div>
-                Welcome!{" "}
-                <a href="#" className="link">
-                  {profile.firstName} {profile.lastName}
-                </a>
-              </div>
-            </div>
-            <div className="form-section">
-              <h2>Edit Your Profile</h2>
-              <form onSubmit={submit}>
-                <div className="form-group">
-                  <label htmlFor="firstName">First Name</label>
-                  <input
-                    type="text"
-                    id="firstName"
-                    value={profile.firstName}
-                    className="input"
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="lastName">Last Name</label>
-                  <input
-                    type="text"
-                    id="lastName"
-                    value={profile.lastName}
-                    className="input"
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="email">Email</label>
-                  <input
-                    type="email"
-                    id="email"
-                    value={profile.email}
-                    className="input"
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="address">Address</label>
-                  <input
-                    type="text"
-                    id="address"
-                    value={profile.address}
-                    className="input"
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="currentPassword">Current Password</label>
-                  <input
-                    type="password"
-                    id="currentPassword"
-                    name="currentPassword"
-                    value={passwords.currentPassword}
-                    onChange={change}
-                    className="input"
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="newPassword">New Password</label>
-                  <input
-                    type="password"
-                    id="newPassword"
-                    name="newPassword"
-                    value={passwords.newPassword}
-                    onChange={change}
-                    className="input"
-                  />
-                </div>
-                <div className="form-group">
-                  <label htmlFor="confirmNewPassword">
-                    Confirm New Password
-                  </label>
-                  <input
-                    type="password"
-                    id="confirmNewPassword"
-                    name="confirmNewPassword"
-                    value={passwords.confirmNewPassword}
-                    onChange={change}
-                    className="input"
-                  />
-                </div>
-                <div className="button-group">
-                  <button
-                    type="button"
-                    onClick={() => alert("Edit canceled.")}
-                    className="button"
-                  >
-                    Cancel
-                  </button>
-                  <button type="submit" className="button save-button">
-                    Save Changes
-                  </button>
-                </div>
-              </form>
-            </div>
+      <div className="profile-container">
+        <form onSubmit={submit}>
+          <div className="profile-form">
+            <h1>Profile</h1>
+            <label>Username</label>
+            <input
+              type="text"
+              name="username"
+              value={profile.username}
+              onChange={(e) =>
+                setProfile({ ...profile, username: e.target.value })
+              }
+            />
+            <label>Email</label>
+            <input
+              type="email"
+              name="email"
+              value={profile.email}
+              onChange={(e) =>
+                setProfile({ ...profile, email: e.target.value })
+              }
+            />
+            <label>Password</label>
+            <input
+              type="password"
+              name="password"
+              value={profile.password}
+              onChange={(e) =>
+                setProfile({ ...profile, password: e.target.value })
+              }
+            />
+
+            <button type="submit">Update</button>
           </div>
-        </div>
+        </form>
       </div>
-      <Footer />
     </div>
   );
-
 };
 
 export default Profile;

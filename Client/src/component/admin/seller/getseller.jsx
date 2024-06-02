@@ -1,20 +1,20 @@
-import React from 'react'
-import { useLocation,useNavigate } from 'react-router-dom'
-export const getseller = () => {
-  const location=useLocation()
-  const {dataseller}=location.state
-  const navigate = useNavigate()
+import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+const getseller = () => {
+  const location = useLocation();
+  const { dataseller } = location.state;
+  const navigate = useNavigate();
   return (
-<>
-{dataseller.map((el)=>{
+    <div>
+      {dataseller.map((el) => {
+        return (
+          <div>
+            <h2>{el.username}</h2>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
 
- return <div>
-   <h2 >{el.username}</h2>
-  </div>
-})}
-</>
-   
-  )
-}
-
-export default getseller()
+export default getseller;
