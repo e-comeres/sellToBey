@@ -6,10 +6,13 @@ export const getseller = () => {
   const navigate = useNavigate()
   return (
 <>
+<div>
+    <button onClick={()=>{navigate("/admin")}}>back admin page</button>
+   </div>
 {dataseller.map((el)=>{
 
  return <div>
-   <h2 >{el.username}</h2>
+   <h2 onClick={()=>{navigate("/oneseller",{state:{el:el}})}} >{el.username}</h2>
   </div>
 })}
 </>
@@ -17,4 +20,4 @@ export const getseller = () => {
   )
 }
 
-export default getseller()
+export default getseller
