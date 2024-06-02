@@ -1,6 +1,7 @@
 const db= require('../database/index')
 
-const getOne = (req,res)=>{
+module.exports = {
+getOne : (req,res)=>{
     db.Seller.findOne()
     db.Product.findOne({
         where: {
@@ -13,6 +14,18 @@ const getOne = (req,res)=>{
         .catch((err) => {
           res.json(err);
         });
+    },
+    updateOne: (req, res) => {
+      db.Product.update(req.body, {
+        where: {
+          id: req.params.id,
+        },
+      })
+        .then((data) => {
+          res.json(data);
+        })
+        .catch((err) => {
+          res.json(err);
+        });
     }
-
-    module.exports= getOne
+  }
