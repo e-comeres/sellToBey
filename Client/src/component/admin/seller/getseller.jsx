@@ -1,19 +1,37 @@
-import React from 'react'
-import { useLocation } from 'react-router-dom'
-export const getseller = () => {
-  const location=useLocation()
-  const {dataseller}=location.state
+import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import Navbar from "../../navbar/Navbar";
+const getseller = () => {
+  const location = useLocation();
+  const { dataseller } = location.state;
+  const navigate = useNavigate();
   return (
-<>
-{dataseller.map((el)=>{
+    <>
+      <Navbar />
+      <div>
+        <button
+          onClick={() => {
+            navigate("/admin");
+          }}
+        >
+          back admin page
+        </button>
+      </div>
+      {dataseller.map((el) => {
+        return (
+          <div>
+            <h2
+              onClick={() => {
+                navigate("/oneseller", { state: { el: el } });
+              }}
+            >
+              {el.username}
+            </h2>
+          </div>
+        );
+      })}
+    </>
+  );
+};
 
- return <div>
-    <h2 >{el.username}</h2>
-  </div>
-})}
-</>
-   
-  )
-}
-
-export default getseller
+export default getseller;

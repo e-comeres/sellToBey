@@ -9,13 +9,13 @@ const Home = ({ data }) => {
   const [best, setBest] = useState([]);
   const [flash, setFlash] = useState([]);
   const { user } = useAuth();
-  console.log(user);
+  
   const addToPanier = (id) => {
     const data = {
       UserId: user.id,
       productId: id,
     };
-    console.log(data, "data");
+
     axios
       .post("http://localhost:4000/api/panier/usercart", data)
       .then((res) => {
@@ -30,7 +30,7 @@ const Home = ({ data }) => {
       .get(`http://localhost:4000/api/products/condition/best seller`)
       .then((response) => {
         setBest(response.data);
-        console.log(best);
+      
       })
       .catch((err) => {
         console.error(err);
@@ -39,7 +39,7 @@ const Home = ({ data }) => {
         .get(`http://localhost:4000/api/products/condition/flash sells`)
         .then((response) => {
           setFlash(response.data);
-          console.log(response.data);
+      
         })
         .catch((err) => {
           console.error(err);
@@ -48,21 +48,37 @@ const Home = ({ data }) => {
   return (
     <div>
       <Navbar />
-      <div>
-        <input type="radio" name="position" defaultChecked="" />
-        <input type="radio" name="position" />
-        <input type="radio" name="position" />
-        <input type="radio" name="position" />
-        <input type="radio" name="position" />
-        <main id="carousel">
-          {data.map((el) => {
-            return (
-              <div className="item">
-                <img id="carImg" src={el.imgUrl} alt="" />
-              </div>
-            );
-          })}
-        </main>
+      <div className="header">
+        <div className="sideBar">
+          <ul>
+            <li>Man's Clothing</li>
+            <li>Women's Clothing </li>
+            <li> Electronics</li>
+            <li>Medecine</li>
+            <li>Sport</li>
+            <li>toys</li>
+            <li>Health And Beauty</li>
+            <li>Grociries</li>
+            <li>Pets</li>
+          </ul>
+        </div>
+        <div className="carousel">
+          <input type="radio" name="position" defaultChecked="" />
+          <input type="radio" name="position" />
+          <input type="radio" name="position" />
+          <input type="radio" name="position" />
+          <input type="radio" name="position" />
+
+          <main id="carousel">
+            {data.map((el) => {
+              return (
+                <div className="item">
+                  <img id="carImg" src={el.imgUrl} alt="" />
+                </div>
+              );
+            })}
+          </main>
+        </div>
       </div>
 
       <h2>flash Sells</h2>
