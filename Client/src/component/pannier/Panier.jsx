@@ -8,6 +8,7 @@ import Navbar from "../navbar/Navbar";
 const Panier = () => {
   const [sel3a, setSel3a] = useState([]);
   const [total, setTotal] = useState(0);
+  const [refre, setRefre] = useState(false);
   const { user } = useAuth();
   const navigate = useNavigate();
 
@@ -26,7 +27,7 @@ const Panier = () => {
       .catch((err) => {
         console.error(err);
       });
-  }, [user.id]);
+  }, [refre, user.id]);
 
   const handleQuantityChange = (index, newQuantity) => {
     const updatedProducts = [...sel3a];
@@ -40,7 +41,17 @@ const Panier = () => {
     setSel3a(updatedProducts);
     setTotal(newTotal);
   };
-
+  const remove = (productId) => {
+    axios
+      .delete(`http://localhost:4000/api/panier/del/${productId}`)
+      .then((response) => {
+        console.log(response);
+        setRefre(!refre);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
   return (
     <div>
       <Navbar />
@@ -56,6 +67,7 @@ const Panier = () => {
               <th>Price</th>
               <th>Quantity</th>
               <th>Subtotal</th>
+              <th>delete</th>
             </tr>
           </thead>
           <tbody>
@@ -82,6 +94,13 @@ const Panier = () => {
                   />
                 </td>
                 <td>${el.price * (el.quantity || 1)}</td>
+                <td
+                  onClick={() => {
+                    remove(el.id);
+                  }}
+                >
+                  X
+                </td>
               </tr>
             ))}
           </tbody>
