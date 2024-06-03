@@ -7,7 +7,7 @@ import Footer from "../footer/Footer";
 const OneCategory = () => {
   const location = useLocation();
   const { cat } = location.state;
-  console.log(cat, "oneCath");
+
   return (
     <div>
       <Navbar />
