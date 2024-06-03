@@ -1,13 +1,15 @@
 import React from "react";
-import { redirect, useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
-export const getoneseller = () => {
+import "./one.css";
+const getoneseller = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { el } = location.state;
-  const delet = () => {
+
+  const deleteSeller = () => {
     const confirmDelete = window.confirm(
-      "Are you sure you want to delete this seller ?"
+      "Are you sure you want to delete this seller?"
     );
     if (confirmDelete) {
       axios
@@ -20,23 +22,18 @@ export const getoneseller = () => {
         });
     }
   };
+
   return (
-    <div>
-      <h2>{el.username}</h2>
-      <h2>{el.email}</h2>
-      <button
-        onClick={() => {
-          delet();
-        }}
-      >
-        delete
-      </button>
-      <button
-        onClick={() => {
-          navigate("/admin");
-        }}
-      >
-        back to admin page
+    <div className="dashboard">
+      <div className="seller-details">
+        <h2>{el.username}</h2>
+        <h3>Email: {el.email}</h3>
+        <button className="delete-btn" onClick={deleteSeller}>
+          Delete Seller
+        </button>
+      </div>
+      <button className="back-btn" onClick={() => navigate("/admin")}>
+        Back to Admin Page
       </button>
     </div>
   );
