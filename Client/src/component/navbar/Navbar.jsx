@@ -60,7 +60,7 @@ const Navbar = () => {
               <div className="dropdown ">
                 <i className="fa-solid fa-user toggle"></i>
                 <ul className="dropdown-menu">
-                  <li>
+                  <li onClick={() => navigate("/profile")}>
                     <i class="fa-regular fa-user"></i>
                     <span>Profile</span>
                   </li>

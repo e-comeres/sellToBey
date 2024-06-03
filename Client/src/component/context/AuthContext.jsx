@@ -21,12 +21,10 @@ export const AuthProvider = ({ children }) => {
 
   const loginAction = async (data) => {
     try {
-      console.log("hello");
       const response = await axios.post(
         "http://localhost:4000/api/auth/login",
         data
       );
-      console.log("admin", response);
 
       if (response.status === 200) {
         toast.success(response.data.message);
@@ -53,7 +51,7 @@ export const AuthProvider = ({ children }) => {
       }
     } catch (err) {
       console.error(err);
-      // toast.error(err.response.data.message);
+      toast.error(err.response?.data?.message || "Login failed!");
     }
   };
 

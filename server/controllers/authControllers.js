@@ -6,7 +6,6 @@ const { JWT_SECRET } = require("../../config");
 
 async function login(req, res) {
   const { username, email, password } = req.body;
-
   try {
     //user
     const user = await db.User.findOne({ where: { username } });
@@ -63,10 +62,8 @@ async function login(req, res) {
     return res.status(500).json({ message: "error" });
   }
 }
-
 async function register(req, res) {
   const { username, email, password, role } = req.body;
-
   try {
     const hashedPassword = await bcrypt.hash(password, 10);
     if (role === "user") {
@@ -91,7 +88,6 @@ async function register(req, res) {
         role: "seller",
       });
     }
-
     return res.status(201).json({ message: "created successfully" });
   } catch (error) {
     console.error(error);
@@ -100,37 +96,37 @@ async function register(req, res) {
 }
 async function UpdateUser(req, res) {
   const { id } = req.params;
-  console.log(id);
   const { username, email, password } = req.body;
-  if (!username && !email && !password)
+  if (!username && !email && !password) {
     return res.status(400).json({ message: "No data to update" });
+  }
   try {
     const updateFields = {};
-    if (username) updateFields.username = username;
-
-    if (email) updateFields.email = email;
+    if (username) {
+      updateFields.username = username;
+    }
+    if (email) {
+      updateFields.email = email;
+    }
     if (password) {
       const salt = await bcrypt.genSalt(10);
       const hashedPassword = await bcrypt.hash(password, salt);
       updateFields.password = hashedPassword;
     }
     const result = await db.User.update(updateFields, {
-      where: {
-        id: id,
-      },
+      where: { id },
     });
 
     if (result[0] === 0) {
-      console.log("No record found to update");
-    } else {
-      console.log("Record updated successfully");
+      return res
+        .status(404)
+        .json({ message: "User not found or no changes detected" });
     }
 
-    return res
-      .status(200)
-      .json({ message: "success updated", results: result });
+    return res.status(200).json({ message: "Profile updated successfully" });
   } catch (err) {
-    return res.status(400).json({ error: err.message });
+    console.error("Error updating profile:", err.message);
+    return res.status(500).json({ error: "Server error" });
   }
 }
 module.exports = { login, register, UpdateUser };
