@@ -1,13 +1,10 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import Navbar from "../../navbar/Navbar";
-const getseller = () => {
-  const location = useLocation();
-  const { dataseller } = location.state;
+const getseller = ({ dataseller }) => {
   const navigate = useNavigate();
   return (
     <>
-      <Navbar />
       <div>
         <button
           onClick={() => {

@@ -4,11 +4,12 @@ import Navbar from "../navbar/Navbar";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Footer from "../footer/Footer";
-
+import { useAuth } from "../context/AuthContext";
+import "./SellerInterface.css";
 function SellerInterface() {
   const [sellerProducts, setSellerProducts] = useState([]);
   const navigate = useNavigate();
-
+  const { seller } = useAuth();
   useEffect(() => {
     axios
       .get(`http://localhost:4000/api/seller`)
@@ -20,7 +21,8 @@ function SellerInterface() {
       .catch((error) => console.error(error));
   }, []);
 
-  const SellerId = null;
+  const id = null;
+  console.log(seller);
 
   return (
     <div>
@@ -36,7 +38,7 @@ function SellerInterface() {
         <div className="products-container">
           <ul className="products-list">
             {sellerProducts
-              .filter((product) => product.SellerId === SellerId)
+              .filter((product) => product.SellerId === id)
               .map((product) => (
                 <li key={product.id} className="product-item">
                   <h2 className="product-name">{product.name}</h2>

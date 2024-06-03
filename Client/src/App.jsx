@@ -10,7 +10,7 @@ import SellerInterface from "./component/seller/SellerInterface";
 import NewProduct from "./component/seller/NewProduct";
 import OneProduct from "./component/seller/OneProduct";
 import Admin from "./component/admin/adminapp";
-import Getprodact from "./component/admin/prodacts/Getprodact";
+import Getprodact from "./component/admin/prodacts/getprodact";
 
 import Getoneprodact from "./component/admin/prodacts/getoneprodact";
 import Getusers from "./component/admin/users/getusers";

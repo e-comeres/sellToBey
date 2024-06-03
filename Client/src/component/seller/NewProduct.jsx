@@ -4,7 +4,7 @@ import Navbar from "../navbar/Navbar";
 import { useNavigate } from "react-router-dom";
 
 import Footer from "../footer/Footer";
-// import './NewProduct.css';
+import "./newProduct.css";
 
 function NewProduct() {
   const [newProduct, setNewProduct] = useState({

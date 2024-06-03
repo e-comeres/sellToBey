@@ -1,10 +1,8 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 
-const getprodact = () => {
+const getprodact = ({ dataprodact }) => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const { dataprodact } = location.state;
 
   return (
     <>

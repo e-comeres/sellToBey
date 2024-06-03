@@ -5,11 +5,12 @@ import Category from "./Category";
 import axios from "axios";
 import Footer from "../footer/Footer";
 import { useAuth } from "../context/AuthContext";
+import { useNavigate } from "react-router-dom";
 const Home = ({ data }) => {
   const [best, setBest] = useState([]);
   const [flash, setFlash] = useState([]);
   const { user } = useAuth();
-  
+  const navigate = useNavigate();
   const addToPanier = (id) => {
     const data = {
       UserId: user.id,
@@ -30,7 +31,6 @@ const Home = ({ data }) => {
       .get(`http://localhost:4000/api/products/condition/best seller`)
       .then((response) => {
         setBest(response.data);
-      
       })
       .catch((err) => {
         console.error(err);
@@ -39,7 +39,6 @@ const Home = ({ data }) => {
         .get(`http://localhost:4000/api/products/condition/flash sells`)
         .then((response) => {
           setFlash(response.data);
-      
         })
         .catch((err) => {
           console.error(err);
@@ -162,12 +161,17 @@ const Home = ({ data }) => {
         </div>
         <h2>explore our products</h2>
         <div className="grid-container">
-          {data.map((el) => {
+          {data.map((product) => {
             return (
               <div
+                onClick={() => {
+                  navigate("/sellerOneProduct", {
+                    state: { product: product },
+                  });
+                }}
                 className="container"
                 style={{
-                  background: `url(${el.imgUrl})`,
+                  background: `url(${product.imgUrl})`,
                   backgroundSize: "cover",
                   backgroundRepeat: "no-repeat",
                 }}
@@ -175,18 +179,18 @@ const Home = ({ data }) => {
                 <div className="overlay">
                   <div className="items" />
                   <div className="items head">
-                    <p>{el.name}</p>
+                    <p>{product.name}</p>
                     <hr />
                   </div>
                   <div className="items price">
                     <p className="old">$699</p>
-                    <p className="new">${el.price}</p>
+                    <p className="new">${product.price}</p>
                   </div>
                   <div className="items cart">
                     <i className="fa fa-shopping-cart" />
                     <span
                       onClick={() => {
-                        addToPanier(el.id);
+                        addToPanier(product.id);
                       }}
                     >
                       ADD TO CART
