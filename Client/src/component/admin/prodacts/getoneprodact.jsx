@@ -1,6 +1,7 @@
 import React from "react";
 import { redirect, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import Navbar from "../../navbar/Navbar";
 const getoneprodact = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -22,6 +23,7 @@ const getoneprodact = () => {
   };
   return (
     <>
+      <Navbar />
       <div>
         <h2>{el.name}</h2>
         <img src={el.imgUrl} />

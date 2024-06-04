@@ -6,7 +6,6 @@ import Getprodact from "./prodacts/getprodact";
 import axios from "axios";
 import Getusers from "./users/getusers";
 import Getseller from "./seller/getseller.jsx";
-// import Getseller from "./component/admin/seller/getseller";
 
 const Admin = () => {
   const [dataprodact, setdataprodact] = useState([]);
@@ -14,6 +13,7 @@ const Admin = () => {
   const [dataseller, setdataseller] = useState([]);
   const navigate = useNavigate();
   const [selectedTab, setSelectedTab] = useState("products");
+
   useEffect(() => {
     axios
       .get("http://localhost:4000/api/products")
@@ -40,6 +40,7 @@ const Admin = () => {
         console.log(err);
       });
   }, []);
+
   const handleTabClick = (tab) => {
     setSelectedTab(tab);
   };

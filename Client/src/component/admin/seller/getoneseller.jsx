@@ -2,6 +2,7 @@ import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./one.css";
+import Navbar from "../../navbar/Navbar";
 const getoneseller = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -24,17 +25,20 @@ const getoneseller = () => {
   };
 
   return (
-    <div className="dashboard">
-      <div className="seller-details">
-        <h2>{el.username}</h2>
-        <h3>Email: {el.email}</h3>
-        <button className="delete-btn" onClick={deleteSeller}>
-          Delete Seller
+    <div>
+      <Navbar />
+      <div className="dashboard">
+        <div className="seller-details">
+          <h2>{el.username}</h2>
+          <h3>Email: {el.email}</h3>
+          <button className="delete-btn" onClick={deleteSeller}>
+            Delete Seller
+          </button>
+        </div>
+        <button className="back-btn" onClick={() => navigate("/admin")}>
+          Back to Admin Page
         </button>
       </div>
-      <button className="back-btn" onClick={() => navigate("/admin")}>
-        Back to Admin Page
-      </button>
     </div>
   );
 };
